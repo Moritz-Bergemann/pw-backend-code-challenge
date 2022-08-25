@@ -2,14 +2,12 @@ package com.demo.pwbackendchallenge.battery;
 
 import com.demo.pwbackendchallenge.battery.dto.AddBatteryDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Battery {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private double wattageCapacity;
