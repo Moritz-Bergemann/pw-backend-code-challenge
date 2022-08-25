@@ -14,7 +14,7 @@ public class DefaultBatteryService implements BatteryService {
     private BatteryRepository batteryRepository;
 
     /**
-     * Adds the provided set of battery DTO representations to the database
+     * Adds the provided set of battery DTO representations to the database.
      */
     public List<AddBatteryConfirmDto> addBatteries(List<AddBatteryDto> batteryDtos) throws BadAddRequestException {
         // Sanity checks

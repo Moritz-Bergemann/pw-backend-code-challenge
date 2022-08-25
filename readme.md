@@ -88,8 +88,11 @@ The above query would result in the following output (given batteries are define
   - 
 
 ### Design decisions
-- Chose to have no batteries found for a postcode request return empty list 200 rather than 404 - as long as the query was still valid the request is also valid.
+- I chose to have no batteries found for a postcode request return empty list 200 rather than 404 - as long as the query was still valid the request is also valid.\
+- The database is currently an in-memory H2 database. The implementation would allow for switching to a different non in-memory with minimal changes.
+- 
 
 ### Current issues
 - The use of `ResponseStatusException` allowed for the quick implementation of informative error messages, but required `server.error.include-message=always` to be set in `application.properties`. This is a security concern as it could lead to the leaking of internal errors. This could be adjusted by moving to the use of a more fine-grained rest error handling system, such as `ControllerAdvice`.
 - The use of annotation-based input validation on `AddBatteryDto` allowed for the quick implementation of input validation, but does not provide informative error messaging and leaks some internal representations. This could be fixed by programatically checking input objects and using custom error handlers as above.
+- Unit tests for the `BatteryRepository` were not implemented due to time limitations.
