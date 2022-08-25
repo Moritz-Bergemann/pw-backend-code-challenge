@@ -13,8 +13,16 @@ public class DefaultBatteryService implements BatteryService {
     @Autowired
     private BatteryRepository batteryRepository;
 
-    public List<AddBatteryConfirmDto> addBatteries(List<AddBatteryDto> batteryDtos) {
-        //Convert DTOs to batteries
+    /**
+     * Adds the provided set of battery DTO representations to the database
+     */
+    public List<AddBatteryConfirmDto> addBatteries(List<AddBatteryDto> batteryDtos) throws BadAddRequestException {
+        // Sanity checks
+        if (batteryDtos.size() == 0) {
+            throw new BadAddRequestException("One or more battery details must be provided");
+        }
+
+        // Convert DTOs to batteries
         List<Battery> batteries = batteryDtos.stream()
                 .map(Battery::fromAddEntryDto)
                 .toList();
@@ -26,19 +34,23 @@ public class DefaultBatteryService implements BatteryService {
                 .toList();
     }
 
-    public BatteryPostcodeReportDto getBatteriesByPostcode(int minPostcode, int maxPostcode) throws BadSearchRequestException {
+    /**
+     * Retrieves a set of batteries in postcode DTO format from the database.
+     */
+    public BatteryPostcodeReportDto getBatteriesByPostcode(int startPostcode, int endPostcode) throws BadSearchRequestException {
         // Sanity checks
-        if (minPostcode > maxPostcode) {
-            throw new BadSearchRequestException("Minimum postcode must be less than maximum postcode");
-        }
-        if (minPostcode < 0 || maxPostcode < 0) {
+        if (startPostcode < 0 || endPostcode < 0) {
             throw new BadSearchRequestException("Postcode values cannot be negative");
         }
+        if (startPostcode > endPostcode) {
+            throw new BadSearchRequestException("Start postcode must be less than end postcode");
+        }
 
-        List<Battery> batteries = batteryRepository.findByPostCodeBetweenOrderByNameAsc(minPostcode, maxPostcode);
+        List<Battery> batteries = batteryRepository.findByPostcodeBetweenOrderByNameAsc(startPostcode, endPostcode);
 
         List<String> batteryNames = batteries.stream()
                 .map(Battery::getName)
+                .sorted()
                 .toList();
 
         double totalWattageCapacity = batteries.stream()

@@ -17,19 +17,29 @@ import java.util.List;
 @RequestMapping("/api/battery")
 public class BatteryController {
     private static final String RESPONSE_OK_MESSAGE_TEMPLATE = "%s batteries successfully added.";
-
     @Autowired
     private BatteryService service;
 
+    /**
+     * API endpoint for adding batteries to the database.
+     */
     @PostMapping(consumes = {"application/json"})
     public ResponseEntity<AddBatteryConfirmCollectionDto> addBatteries(@Valid @RequestBody AddBatteryCollectionDto addBatteriesDto) {
-        List<AddBatteryConfirmDto> addedBatteries = service.addBatteries(addBatteriesDto.getBatteries());
+        List<AddBatteryConfirmDto> addedBatteries;
+        try {
+            addedBatteries = service.addBatteries(addBatteriesDto.getBatteries());
+        } catch (BadAddRequestException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Bad add request: %s", ex.getMessage()));
+        }
 
         AddBatteryConfirmCollectionDto confirmDto = new AddBatteryConfirmCollectionDto(addedBatteries);
 
         return new ResponseEntity<>(confirmDto, HttpStatus.OK);
     }
 
+    /**
+     * API endpoint for retrieving batteries by postcode from the database.
+     */
     @GetMapping
     public ResponseEntity<BatteryPostcodeReportDto> getBatteriesByPostcode(@RequestParam int startPostcode, @RequestParam int endPostcode) { //FIXME requestbody may be wrong
         BatteryPostcodeReportDto reportDto;
@@ -40,10 +50,5 @@ public class BatteryController {
         }
 
         return new ResponseEntity<>(reportDto, HttpStatus.OK);
-    }
-
-    @GetMapping("test")
-    public ResponseEntity<String> basicTest() {
-        return new ResponseEntity<>("The API works at all!", HttpStatus.OK);
     }
 }
