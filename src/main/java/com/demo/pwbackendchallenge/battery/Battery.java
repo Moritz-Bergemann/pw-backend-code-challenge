@@ -22,6 +22,13 @@ public class Battery {
         this.postcode = postcode;
     }
 
+    public Battery(Long id, String name, int postcode, double wattageCapacity) {
+        this.id = id;
+        this.name = name;
+        this.wattageCapacity = wattageCapacity;
+        this.postcode = postcode;
+    }
+
     public Long getId() {
         return id;
     }

@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  * Data transfer object for battery details.
  */
 public class AddBatteryDto {
-    @JsonProperty(required = true) //TODO figure out point of this
+    @JsonProperty(required = true)
     @NotNull
     @Size(min = 1, max = 100)
     private String name;
@@ -23,6 +23,15 @@ public class AddBatteryDto {
     @JsonProperty(required = true)
     @DecimalMin(value = "0.0", message = "Battery capacity cannot be negative")
     private double wattageCapacity; //TODO should wattCapacity be double?
+
+    public AddBatteryDto() {
+    }
+
+    public AddBatteryDto(String name, int postcode, double wattageCapacity) {
+        this.name = name;
+        this.postcode = postcode;
+        this.wattageCapacity = wattageCapacity;
+    }
 
     public String getName() {
         return name;
