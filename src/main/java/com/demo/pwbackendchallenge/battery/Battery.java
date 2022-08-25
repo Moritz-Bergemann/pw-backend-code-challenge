@@ -11,15 +11,15 @@ public class Battery {
     private Long id;
     private String name;
     private double wattageCapacity;
-    private int postCode;
+    private int postcode;
 
     public Battery() {
     }
 
-    public Battery(String name, double wattageCapacity, int postCode) {
+    public Battery(String name, double wattageCapacity, int postcode) {
         this.name = name;
         this.wattageCapacity = wattageCapacity;
-        this.postCode = postCode;
+        this.postcode = postcode;
     }
 
     public Long getId() {
@@ -42,12 +42,12 @@ public class Battery {
         this.wattageCapacity = wattageCapacity;
     }
 
-    public int getPostCode() {
-        return postCode;
+    public int getPostcode() {
+        return postcode;
     }
 
-    public void setPostCode(int postCode) {
-        this.postCode = postCode;
+    public void setPostcode(int postcode) {
+        this.postcode = postcode;
     }
 
     /**
