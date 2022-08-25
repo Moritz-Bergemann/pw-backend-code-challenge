@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/batteries")
+@RequestMapping("/api/battery")
 public class BatteryController {
     private static final String RESPONSE_OK_MESSAGE_TEMPLATE = "%s batteries successfully added.";
 
     @Autowired
     private BatteryService service;
 
-    @PostMapping
-    public ResponseEntity<String> addBatteries(@Valid AddBatteryCollectionDto addBatteriesDto) {
+    @PostMapping(consumes = {"application/json"})
+    public ResponseEntity<String> addBatteries(@Valid @RequestBody AddBatteryCollectionDto addBatteriesDto) {
         service.addBatteries(addBatteriesDto.getBatteries());
 
         int batteriesAdded = addBatteriesDto.getBatteries().size();
@@ -33,7 +33,7 @@ public class BatteryController {
         return new ResponseEntity<>(reportDto, HttpStatus.OK);
     }
 
-    @GetMapping("api/test")
+    @GetMapping("test")
     public ResponseEntity<String> basicTest() {
         return new ResponseEntity<>("The API works at all!", HttpStatus.OK);
     }
