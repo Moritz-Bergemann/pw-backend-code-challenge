@@ -28,7 +28,7 @@ Add a list of batteries to the database, the batteries must be defined in the po
     "batteries": [
         {
             "name": "battery1",
-            "postcode": 100,
+            "postcode": 101,
             "wattageCapacity": 10.0
         },
       {
