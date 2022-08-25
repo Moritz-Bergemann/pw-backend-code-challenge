@@ -66,7 +66,7 @@ The API will then return the produced battery objects, including unique IDs (cur
 ### `/api/battery` - `GET`
 Retrieve a list of batteries (as well as statistics) from the database based on query-parameters postcode range.
 
-**`GET` request to `/api/battery?startPostcode=101&endPostcode=103**
+**`GET` request to `/api/battery?startPostcode=101&endPostcode=103`**
 <no body>
 
 The above query would result in the following output (given batteries are defined as in `POST` request):
@@ -89,7 +89,6 @@ The above query would result in the following output (given batteries are define
   - Names must be at least 1 character and up to 100 characters long.
   - Battery capacity cannot be negative.
   - 2 given batteries **can** have the same name, postcode, and wattage capacity.
-  - 
 
 ### Design decisions
 - I chose to have no batteries found for a postcode request return empty list 200 rather than 404 - as long as the query was still valid the request is also valid.
