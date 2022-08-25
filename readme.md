@@ -1,6 +1,9 @@
 # Powerledger Backend Challenge
 This API is an implementation of the Powerledger Backend API Challenge
 
+## Requirements
+**Java 17** is required to run this application. (Containerisation would have been a nice stretch goal, but I unfortunately did not have time!)
+
 ## Running and installation
 To run the API, use the included Maven wrapper:
 ```shell
@@ -89,9 +92,8 @@ The above query would result in the following output (given batteries are define
   - 
 
 ### Design decisions
-- I chose to have no batteries found for a postcode request return empty list 200 rather than 404 - as long as the query was still valid the request is also valid.\
+- I chose to have no batteries found for a postcode request return empty list 200 rather than 404 - as long as the query was still valid the request is also valid.
 - The database is currently an in-memory H2 database. The implementation would allow for switching to a different non in-memory with minimal changes.
-- 
 
 ### Current issues
 - The use of `ResponseStatusException` allowed for the quick implementation of informative error messages, but required `server.error.include-message=always` to be set in `application.properties`. This is a security concern as it could lead to the leaking of internal errors. This could be adjusted by moving to the use of a more fine-grained rest error handling system, such as `ControllerAdvice`.
