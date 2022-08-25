@@ -20,7 +20,7 @@ To run unit tests:
 The API exposes 2 endpoints - `POST` and `GET` for `/api/battery`.
 
 ### `/api/battery` - `POST`
-Add a list of batteries to the database, the batteries must be defined in the post body.
+Add a list of batteries to the database - each with a name, postcode, and wattage capacity. These must be defined in the post body as follows.
 
 **`POST` request to `/api/battery`:**
 ```json
@@ -67,7 +67,7 @@ The API will then return the produced battery objects, including unique IDs (cur
 Retrieve a list of batteries (as well as statistics) from the database based on query-parameters postcode range.
 
 **`GET` request to `/api/battery?startPostcode=101&endPostcode=103`**
-<no body>
+(no request body)
 
 The above query would result in the following output (given batteries are defined as in `POST` request):
 ```json
