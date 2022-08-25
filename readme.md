@@ -2,15 +2,16 @@
 This API is an implementation of the Powerledger Backend API Challenge
 
 ## Running and installation
-To run the API, use Maven:
+To run the API, use the included Maven wrapper:
 ```shell
-mvn clean run
+./mvnw clean spring-boot:run
 ```
 
 To run unit tests:
 ```shell
-mvn clean test
+./mvnw clean test
 ```
+(These commands are for systems using bash. If using Windows, replace `mvnw` with `mvnw.cmd`.)
 
 ## API Documentation
 The API exposes 2 endpoints - `POST` and `GET` for `/api/battery`.
