@@ -22,7 +22,7 @@ public class AddBatteryDto {
 
     @JsonProperty(required = true)
     @DecimalMin(value = "0.0", message = "Battery capacity cannot be negative")
-    private double wattageCapacity; //TODO should wattCapacity be double?
+    private double wattageCapacity;
 
     public AddBatteryDto() {
     }

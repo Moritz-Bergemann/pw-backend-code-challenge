@@ -50,7 +50,7 @@ public class BatteryController {
      * API endpoint for retrieving batteries by postcode from the database.
      */
     @GetMapping
-    public ResponseEntity<BatteryPostcodeReportDto> getBatteriesByPostcode(@RequestParam int startPostcode, @RequestParam int endPostcode) { //FIXME requestbody may be wrong
+    public ResponseEntity<BatteryPostcodeReportDto> getBatteriesByPostcode(@RequestParam int startPostcode, @RequestParam int endPostcode) {
         BatteryPostcodeReportDto reportDto;
         try {
             reportDto = service.getBatteriesByPostcode(startPostcode, endPostcode);
